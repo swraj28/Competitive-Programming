@@ -71,6 +71,7 @@ void BFS(Graph const& g, int source)
 		// Stop BFS if we have reached last node
 		if (node.ver == N)
 		{
+			cout << "The Minimum No dice throw required is" << endl;
 			cout << node.minDist << endl;
 			break;
 		}
@@ -96,6 +97,8 @@ void BFS(Graph const& g, int source)
 		path.push_back(pred[x]);
 		x = pred[x];
 	}
+	cout << "One of the Probable Path is" << endl;
+	cout << 0 << " ";
 	for (int i = path.size() - 1; i >= 0; i--) {
 		cout << path[i] << " ";
 	}
@@ -126,13 +129,13 @@ void findSolution(unordered_map<int, int> &ladder, unordered_map<int, int> &snak
 	// construct directed graph
 	Graph g(edges);
 	//Print The Directed Graph
-	for (int i = 0; i <= 100; i++) {
-		cout << i << "->";
-		for (auto j : g.adjList[i]) {
-			cout << j << " ";
-		}
-		cout << endl;
-	}
+	// for (int i = 0; i <= 100; i++) {
+	// 	cout << i << "->";
+	// 	for (auto j : g.adjList[i]) {
+	// 		cout << j << " ";
+	// 	}
+	// 	cout << endl;
+	// }
 	// Find Shortest path between 1 and 100 using BFS
 	BFS(g, 0);
 }

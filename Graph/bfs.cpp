@@ -65,5 +65,8 @@ int main() {
 	g.addEdge(2, 3);
 	g.addEdge(3, 5);
 	g.addEdge(3, 4);
+	cout << "The Required Graph is" << endl;
+	g.print();
+	cout << "The BFS Traversal is" << endl;
 	g.bfs(0);
 }

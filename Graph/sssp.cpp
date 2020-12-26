@@ -15,6 +15,20 @@ public:
 		}
 	}
 
+	void print() {
+
+		//Iterate over the map
+		for (auto i : adj) {
+			cout << i.first << "->";
+
+			//i.second is LL
+			for (auto entry : i.second) {
+				cout << entry << ",";
+			}
+			cout << endl;
+		}
+	}
+
 	void bfs_sssp(int src, int dest) {
 
 		queue<int> q;
@@ -49,8 +63,19 @@ public:
 		if (visited[dest] == false) { //if we are unable to reach the destination
 			cout << "No path found" << endl;
 		} else {
+			cout << "distace of eaach node from src node" << endl;
+			for (auto i : d) {
+				cout << i << " ";
+			}
+			cout << endl;
+			cout << "The predecessor(i.e.,parent) of each node" << endl;
+			for (auto i : p) {
+				cout << i << " ";
+			}
+			cout << endl;
 			vector<int> path;
 			//minimum distace
+			cout << "The minimum distace is" << endl;
 			cout << d[dest] << endl;
 			int x = dest;
 			path.push_back(dest);
@@ -59,14 +84,13 @@ public:
 				x = p[x];
 			}
 			reverse(path.begin(), path.end());
+			cout << "The shortest path is" << endl;
 			for (auto i : path) {
 				cout << i << "->";
 			}
 			cout << endl;
 		}
-
 	}
-
 };
 
 int main() {
@@ -75,29 +99,20 @@ int main() {
 
 	g.add_edges(0, 1);
 	g.add_edges(0, 2);
-	g.add_edges(1, 0);
 	g.add_edges(1, 2);
 	g.add_edges(1, 3);
-	g.add_edges(2, 0);
-	g.add_edges(2, 1);
 	g.add_edges(2, 3);
 	g.add_edges(2, 4);
 	g.add_edges(2, 5);
-	g.add_edges(3, 1);
-	g.add_edges(3, 2);
 	g.add_edges(3, 4);
 	g.add_edges(3, 5);
-	g.add_edges(4, 2);
 	g.add_edges(4, 3);
 	g.add_edges(4, 5);
 	g.add_edges(4, 6);
-	g.add_edges(5, 2);
-	g.add_edges(5, 3);
-	g.add_edges(5, 4);
 	g.add_edges(5, 6);
-	g.add_edges(6, 4);
-	g.add_edges(6, 5);
 
+	cout << "The Required Graph representation is" << endl;
+	g.print();
 	g.bfs_sssp(0, 6);
 
 
