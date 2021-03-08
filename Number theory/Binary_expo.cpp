@@ -57,8 +57,21 @@ ll modular_expo(ll a, ll b) {
 	}
 	return res;
 }
-//Fast Modular Exponentation Using Bitmasking
+//Fast Binary Exponentation Using Bitmasking
+ll bin_expo_bitmask(ll a, ll n) { //t.c:-O(log2(n))
 
+	ll ans = 1;
+	while (n > 0) {
+		int last_bit = (n & 1);
+		if (last_bit) {
+			ans *= a;
+		}
+		a = a * a;
+		n = n >> 1;
+	}
+
+	return ans;
+}
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
@@ -67,7 +80,8 @@ int main() {
 	cin >> a >> b;
 	// cout << bin_expo_rec(a, b) << endl;
 	// cout << bin_expo_itr(a, b) << endl;
-	cout << modular_expo(a, b) << endl;
+	// cout << modular_expo(a, b) << endl;
+	cout << bin_expo_bitmask(a, b) << endl;
 
 	return 0;
 }
