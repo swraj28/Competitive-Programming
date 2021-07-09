@@ -12,6 +12,7 @@ public:
     }
 
     void dfs(vector<int> &visited, vector<int> &path, int src, int dest) {
+
         visited[src] = 1;
         path.push_back(src);
 
@@ -32,6 +33,7 @@ public:
             }
         }
     }
+
     void path(int src, int dest) {
 
         vector<int> path;

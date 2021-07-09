@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//Single Source Shortest Path in an unweighted Graph
+//Single Source Shortest Path in an unweighted Graph and undirected graph.
 //t.c-o(v+e)
 class Graph {
 
@@ -35,13 +35,14 @@ public:
 		map<int, bool>visited;
 		int n = adj.size();
 		vector<int> d(n);//it stores the distance of a node from src node
-		vector<int> p(n);//it stores for each vertex the vertex from which we reached it(i.e,the predecessor)
+		vector<int> p(n);//it stores for each vertex the vertex from which we reached it(i.e,the parent)
 
 		//Mark all the node visited as false
 		for (auto i : adj) {
 			int node = i.first;
 			visited[node] = false;
 		}
+
 		q.push(src);
 		visited[src] = true;
 		p[src] = -1; //there will be no parent of src

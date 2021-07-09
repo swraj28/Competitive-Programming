@@ -5,6 +5,7 @@ using namespace std;
 void filter_chars(int n, char a[]) {
 
 	int j = 0;
+
 	while (n > 0) {
 		int last_bit = (n & 1);
 		if (last_bit) {

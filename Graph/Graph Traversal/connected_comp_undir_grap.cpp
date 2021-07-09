@@ -36,12 +36,14 @@ public:
 	}
 
 	//The value of connected components will be equal to the number of times the dfs function will be called.
+
 	void connected_comp() {
 		int n = adj.size();
 		bool*visited = new bool[n];
 		for (int i = 0; i < n; i++) {
 			visited[i] = false;
 		}
+
 		int cnt = 0;
 
 		for (int i = 0; i < n; i++) {

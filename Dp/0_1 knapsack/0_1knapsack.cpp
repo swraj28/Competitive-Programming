@@ -48,7 +48,7 @@ ll knapsack_pure_dp(ll wt[], ll val[], ll w, int n, int si) {
 			if (j >= wt[i - 1]) {
 				dp[i][j] = max(val[i - 1] + dp[i - 1][j - wt[i - 1]], dp[i - 1][j]);
 			} else {
-				dp[i][j] = dp[i][j - 1];
+				dp[i][j] = dp[i - 1][j];
 			}
 		}
 	}

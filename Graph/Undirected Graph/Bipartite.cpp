@@ -23,10 +23,11 @@ bool dfs_helper(vector<int> graph[], int node, int *visited, int parent, int col
 
 bool dfs(vector<int> graph[], int n) {
 
-	// 0-Not Visited, 1-Visited and color is 1,2- Visited and color 2
+	// 0-Not Visited, 1-Visited and color is 1,2- Visited and color 2.
 	int visited[n] = {0};
 
-	//Let us assume that the graph has single component
+	//Let us assume that the graph has single component.
+	// If the graph several component then we need pass the dfs_helper function inside a for loop.
 	int color = 1;
 	bool ans = dfs_helper(graph, 0, visited, -1, color);
 

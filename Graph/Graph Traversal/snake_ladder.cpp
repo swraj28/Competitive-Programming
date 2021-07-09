@@ -3,6 +3,7 @@ using namespace std;
 
 // Number of vertices in the graph
 // 10 x 10 board
+
 #define N 100
 
 // data structure to store graph edges
@@ -11,19 +12,19 @@ struct Edge {
 };
 
 // class to represent a graph object
-class Graph
-{
+class Graph {
+
 public:
 	// An array of vectors to represent adjacency list
 	vector<int> adjList[N + 1];
 
 	// Constructor
 	//vector<Edge> contains all src and dest pair.
-	Graph(vector<Edge> const &edges)
-	{
+	Graph(vector<Edge> const &edges) {
+
 		// add edges to the graph
-		for (Edge edge : edges)
-		{
+		for (Edge edge : edges) {
+
 			int src = edge.src;
 			int dest = edge.dest;
 
@@ -34,8 +35,8 @@ public:
 };
 
 // A queue node
-struct Node
-{
+struct Node {
+
 	// stores number associated with graph node
 	int ver;
 
@@ -44,8 +45,7 @@ struct Node
 };
 
 // Perform BFS on graph g starting from given source vertex
-void BFS(Graph const& g, int source)
-{
+void BFS(Graph const& g, int source) {
 	// create a queue used to do BFS
 	queue<Node> q;
 
@@ -64,15 +64,15 @@ void BFS(Graph const& g, int source)
 	pred[source] = -1;
 
 	// loop till queue is empty
-	while (!q.empty())
-	{
+	while (!q.empty()) {
+
 		// pop front node from queue
 		node = q.front();
 		q.pop();
 
 		// Stop BFS if we have reached last node
-		if (node.ver == N)
-		{
+		if (node.ver == N) {
+
 			cout << "The Minimum No dice throw required is" << endl;
 			cout << node.minDist << endl;
 			break;
@@ -80,8 +80,7 @@ void BFS(Graph const& g, int source)
 
 		// do for every adjacent node of current node
 		for (int u : g.adjList[node.ver])
-			if (!discovered[u])
-			{
+			if (!discovered[u]) {
 				// mark it discovered & push it into queue
 				discovered[u] = true;
 
@@ -92,7 +91,9 @@ void BFS(Graph const& g, int source)
 				q.push(n);
 			}
 	}
+
 	// To Print the path
+
 	vector<int> path;
 	path.push_back(100);
 	int x = 100;
@@ -100,22 +101,23 @@ void BFS(Graph const& g, int source)
 		path.push_back(pred[x]);
 		x = pred[x];
 	}
+
 	cout << "One of the Probable Path is" << endl;
 	cout << 0 << " ";
 	for (int i = path.size() - 1; i >= 0; i--) {
 		cout << path[i] << " ";
 	}
+
 	cout << endl;
 }
 
-void findSolution(unordered_map<int, int> &ladder, unordered_map<int, int> &snake)
-{
+void findSolution(unordered_map<int, int> &ladder, unordered_map<int, int> &snake) {
 	// find all edges involved and store them in a vector to make a graph
 	vector<Edge> edges;
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 1; j <= 6 && i + j <= N; j++)
-		{
+	for (int i = 0; i < N; i++) {
+
+		for (int j = 1; j <= 6 && i + j <= N; j++) {
+
 			int src = i;
 
 			// update destination if there is any ladder
@@ -138,12 +140,14 @@ void findSolution(unordered_map<int, int> &ladder, unordered_map<int, int> &snak
 		}
 		cout << endl;
 	}
+
 	// Find Shortest path between 1 and 100 using BFS
-	BFS(g, 0);
+
+	BFS(g, 0); //We are starting our bfs call from 0.
 }
 
-int main()
-{
+int main() {
+
 	// snakes and ladders are represented using a map
 	unordered_map<int, int> ladder, snake;
 

@@ -8,6 +8,7 @@ using namespace std;
 #define mp make_pair
 
 void bfs(vector<int> graph[], int src, int n, int &ans) {
+
 	vector<int> dis(n + 1, INT_MAX);
 	queue<int> q;
 	q.push(src);
@@ -24,7 +25,7 @@ void bfs(vector<int> graph[], int src, int n, int &ans) {
 				dis[nbr] = dis[cur] + 1;
 				q.push(nbr);
 			} else if (dis[nbr] >= dis[cur]) {
-				// Backedge is encountered
+				// Backedge is encountered (Cycle is encountered)
 				ans = min(ans, dis[nbr] + dis[cur] + 1);
 			}
 		}

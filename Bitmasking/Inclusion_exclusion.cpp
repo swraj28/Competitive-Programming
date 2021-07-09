@@ -1,6 +1,5 @@
 //find out the number of numbers between 1 and n
 //which are divisible by any of the prime numbers less than 20
-
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long

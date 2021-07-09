@@ -20,6 +20,35 @@ string replacePi(string str) {
 	}
 }
 
+//Inplace
+void replace_all_pie(char arr[], int i) {
+
+	if (arr[i] == '\0' or arr[i + 1] == '\0') {
+		return;
+	}
+
+	if (arr[i] == 'p' and arr[i + 1] == 'i') {
+		int j = i + 2;
+
+		while (arr[j] != '\0') {
+			j++;
+		}
+
+		while (j >= (i + 2)) {
+			arr[j + 2] = arr[j];
+			j--;
+		}
+
+		arr[i] = '3';
+		arr[i + 1] = '.';
+		arr[i + 2] = '1';
+		arr[i + 3] = '4';
+		replace_all_pie(arr, i + 4);
+	} else {
+		replace_all_pie(arr, i + 1);
+	}
+}
+
 void printSubsequence(string str, string ans) { //string ans is an empty string.
 	if (str.length() == 0) {
 		cout << ans << endl;

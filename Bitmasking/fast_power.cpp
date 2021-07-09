@@ -3,6 +3,7 @@ using namespace std;
 #define ll long long
 
 ll fast_power_bitmask(ll a , ll n) {
+
 	if (n == 0) {
 		return 1;
 	}

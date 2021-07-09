@@ -29,6 +29,7 @@ void create_adj_matrix() {
 		cout << endl;
 	}
 }
+
 int main() {
 
 	for (int i = 0; i < m; i++) {

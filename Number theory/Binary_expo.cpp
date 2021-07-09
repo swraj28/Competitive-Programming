@@ -25,12 +25,14 @@ ll bin_expo_rec(ll a, ll b) {
 		return 1;
 	}
 	ll res = bin_expo_rec(a, b / 2);
+
 	if (b % 2) {
 		return res * res * a;
 	} else {
 		return res * res;
 	}
 }
+
 //Iterative approach for binary expo
 ll bin_expo_itr(ll a, ll b) {
 	ll res = 1;
@@ -43,6 +45,7 @@ ll bin_expo_itr(ll a, ll b) {
 	}
 	return res;
 }
+
 //Modular exponentation-((a^b)%m)
 //((a*b)%m)=((a%m)*(b%m))%m
 ll modular_expo(ll a, ll b) {
@@ -50,27 +53,15 @@ ll modular_expo(ll a, ll b) {
 	ll res = 1;
 	while (b > 0) {
 		if (b & 1) {
-			res = res * a % mod;
-		}
-		a = a * a % mod;
-		b >>= 1;
-	}
-	return res;
-}
-//Fast Binary Exponentation Using Bitmasking
-ll bin_expo_bitmask(ll a, ll n) { //t.c:-O(log2(n))
-
-	ll ans = 1;
-	while (n > 0) {
-		int last_bit = (n & 1);
-		if (last_bit) {
-			ans *= a;
+			res = res * a;
+			res %= mod;
 		}
 		a = a * a;
-		n = n >> 1;
+		a %= mod;
+		b >>= 1;
 	}
 
-	return ans;
+	return res;
 }
 
 int main() {
@@ -81,7 +72,6 @@ int main() {
 	// cout << bin_expo_rec(a, b) << endl;
 	// cout << bin_expo_itr(a, b) << endl;
 	// cout << modular_expo(a, b) << endl;
-	cout << bin_expo_bitmask(a, b) << endl;
 
 	return 0;
 }

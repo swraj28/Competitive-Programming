@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#include <vector>
-
 using namespace std;
 
 int binarySearch(int arr[], int n, int data) {   //BINARY SEARCH IS ALWAYS APPLICABLE ON SORTED ARRAY.
@@ -47,8 +45,7 @@ int upperBound(int arr[], int n, int data) {
 	return ans;
 }
 
-float square_root(int n, int precision)
-{
+float square_root(int n, int precision) {
 	int start = 0;
 	int end = n;
 

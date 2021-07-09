@@ -18,21 +18,21 @@ public:
 		}
 	}
 	//Dfs:-
-
 	bool cycle_helper(int node, bool*visited, int parent) {
 		visited[node] = true;
+		// cout << node << " ";
 
 		for (auto nbr : adj[node]) {
 			//two cases
 			if (!visited[nbr]) {
+
 				//go and recursively visit the nbr
+				//the nbr may lead to a node which may form a cycle.
 				bool cycle_mila = cycle_helper(nbr, visited, node);
 				if (cycle_mila) {
 					return true;
 				}
-			}
-			//nbr is visted but nbr should not be the parent
-			else if (nbr != parent) {
+			} else if (nbr != parent) {//nbr is visted but nbr should not be the parent
 				return true;
 			}
 		}
@@ -48,6 +48,7 @@ public:
 		}
 
 		//Assuming that we have only one component
+		//we can do it for multiple components.
 		return cycle_helper(0, visited, -1);
 	}
 
@@ -85,17 +86,18 @@ int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	Graph g;
-	// g.add_edges(0, 1);
-	// g.add_edges(1, 2);
-	// g.add_edges(2, 3);
-	// g.add_edges(3, 4);
-	// g.add_edges(4, 0);
-
 	g.add_edges(0, 1);
-	g.add_edges(0, 3);
-	g.add_edges(0, 2);
 	g.add_edges(1, 2);
 	g.add_edges(2, 3);
+	g.add_edges(3, 4);
+	g.add_edges(4, 0);
+	g.add_edges(0, 3);
+
+	// g.add_edges(0, 1);
+	// g.add_edges(0, 3);
+	// g.add_edges(0, 2);
+	// g.add_edges(1, 2);
+	// g.add_edges(2, 3);
 
 
 	if (g.contains_cycle()) {

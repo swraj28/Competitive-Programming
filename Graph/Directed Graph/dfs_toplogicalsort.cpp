@@ -31,6 +31,7 @@ public:
 	}
 
 	void dfsHelper(T node, map<T, bool> &visited, list<T> &ordering) {
+
 		//Whenever to come to a node, mark it visited
 		visited[node] = true;
 
@@ -43,6 +44,7 @@ public:
 
 		ordering.push_front(node);
 
+		// reverse(ordering.begin(), ordering.end());
 		for (auto node : ordering) {
 			cout << node << endl;
 		}
@@ -51,6 +53,7 @@ public:
 	}
 
 	void dfs() {
+
 		map<T, bool> visited;
 		list<T> ordering;
 		//Mark all the nodes as not visited in the beginning
@@ -62,7 +65,6 @@ public:
 		// Call the helper function
 		// Dfs is being called on every node
 		for (auto p : adjList) {
-
 			T node = p.first;
 			if (!visited[node]) {
 				dfsHelper(node, visited, ordering);
@@ -70,6 +72,7 @@ public:
 		}
 
 		//Print the list
+		reverse(ordering.begin(), ordering.end());
 		for (auto node : ordering) {
 			cout << node << endl;
 		}
@@ -92,12 +95,22 @@ int main() {
 
 	Graph<int> g;
 	g.addEdge(0, 2);
-	g.addEdge(0, 3);
+	g.addEdge(1, 3);
 	g.addEdge(1, 2);
 	g.addEdge(2, 4);
 	g.addEdge(3, 4);
 
 	g.dfs();
+
+	// Graph<char> g;
+	// g.addEdge('z', 'x');
+	// g.addEdge('z', 'y');
+	// g.addEdge('y', 'a');
+	// g.addEdge('x', 'a');
+	// g.addEdge('x', 'b');
+	// g.addEdge('x', 'c');
+
+	// g.dfs();
 
 
 	return 0;

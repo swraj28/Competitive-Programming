@@ -33,6 +33,7 @@ void Flood_fill(char mat[][50], int i, int j, char ch, char color) {
 	for (int k = 0; k < 4; k++) {
 		Flood_fill(mat, i + dx[k], j + dy[k], ch, color);
 	}
+
 	return;
 }
 

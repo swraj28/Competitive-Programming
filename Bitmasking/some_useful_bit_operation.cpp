@@ -65,7 +65,7 @@ int clear_last_i_bit(int n, int i) {
 	int mask = (~0);
 	int actual_mask = (mask << i);
 
-	return (n and actual_mask);
+	return (n & actual_mask);
 }
 
 // 7. clear a range of bit from i to j
@@ -75,12 +75,41 @@ int clear_range_i_to_j(int n, int i, int j) {
 	int mask_a = (~0) << (j + 1);
 	int mask_b = (1 << i) - 1;
 
-	int actual_mask = (mask_a or mask_b);
+	int actual_mask = (mask_a | mask_b);
 
-	return (n and actual_mask);
+	return (n & actual_mask);
 }
 
-// 8.
+// 8. Biggest power of 2 that is a divisor of n
+
+void biggest_power(int n) {
+	if (n & 1) {
+		cout << "n is not divisble by any power of 2" << endl;
+		return;
+	}
+
+	int ans = 1;
+
+	while (n > 0) {
+
+		if (n & 1) {
+			break;
+		}
+		ans *= 2;
+		n >>= 1;
+	}
+
+	cout << ans << endl;
+}
+
+// 9. Smallest Power of 2 that is not smaller than n;
+
+void smallest_power(int n) {
+
+	int no_of_bits = (int)log2(n) + 1;
+
+	cout << pow(2, no_of_bits) << endl;
+}
 
 
 int main() {

@@ -1,9 +1,8 @@
 #include<bits/stdc++.h>
-#include<map>
-#include<list>
 using namespace std;
 
 template<typename T>
+
 class Graph {
 
 	map<T, list<T>> adjList;
@@ -34,6 +33,7 @@ public:
 			cout << endl;
 		}
 	}
+
 	//Dfs Recursive:-(Implict Stack)
 	void dfsHelper(T node, map<T, bool> &visited) {
 		//Whenever to come to a node, mark it visited
@@ -47,6 +47,7 @@ public:
 			}
 		}
 	}
+
 	void dfs(T src) {
 		map<T, bool> visited;
 		//Mark all the nodes as not visited in the beginning
@@ -55,32 +56,6 @@ public:
 			visited[node] = false;
 		}
 		dfsHelper(src, visited);
-	}
-
-	//Dfs Iterative:-(We use Explict stack)
-	void Dfs_iterative(T src) {
-		map<T, bool> visited;
-		//Mark all the nodes as not visited in the beginning
-		for (auto p : adjList) {
-			T node = p.first;
-			visited[node] = false;
-		}
-		stack <T> s;
-		s.push(src);
-		visited[src] = true;
-		while (!s.empty()) {
-			T v = s.top();
-			s.pop();
-			cout << v << " ";
-
-			for (auto neighbour : adjList[v]) {
-				if (!visited[neighbour]) {
-					s.push(neighbour);
-					visited[neighbour] = true;
-				}
-			}
-		}
-		cout << endl;
 	}
 };
 
@@ -99,9 +74,6 @@ int main() {
 	cout << "Dfs Recursive Implementaion" << endl;
 	g.dfs(0);
 	cout << endl;
-	cout << "Dfs Iterative Implementaion" << endl;
-	g.Dfs_iterative(0);
-
 
 	return 0;
 }

@@ -34,8 +34,10 @@ public:
 	void bfs(T src) {
 
 		queue<T> q;
+
 		map<T, bool> visited;
 		//Mark all the nodes as not visited in the beginning
+
 		for (auto p : adjList) {
 			T node = p.first;
 			visited[node] = false;
@@ -51,6 +53,7 @@ public:
 			q.pop();
 
 			// For the neigbours of the current node, find out the nodes which are not visited
+
 			for (int neigbour : adjList[node]) {
 				if (!visited[neigbour]) {
 					q.push(neigbour);

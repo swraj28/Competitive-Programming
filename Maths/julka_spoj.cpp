@@ -123,6 +123,7 @@ vector<int> multiply(vector<int> x, vector<int> y) {
 }
 
 vector<int> divide(vector<int> x, int divisor = 2) {
+
 }
 
 int main() {
@@ -131,8 +132,6 @@ int main() {
 	for (int i = 0; i < 10; i++) {
 		string s, d;
 		cin >> s >> d;
-
-
 	}
 
 	return 0;
