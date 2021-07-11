@@ -79,6 +79,7 @@ int main() {
 	}
 
 	set<int> s1;
+
 	for (int i = 0; i < sources.size(); i++) {
 		s1.insert(sources[i]);
 	}
