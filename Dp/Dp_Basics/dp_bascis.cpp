@@ -284,8 +284,6 @@ int countBoardPath(int start, int end) {
 	return count;
 }
 
-
-
 int countBoardPathMemo(int start, int end, int dp[]) {
 	if (start == end) {
 		dp[start] = 1;

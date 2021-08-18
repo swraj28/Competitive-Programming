@@ -63,6 +63,7 @@ void printSubsequence(string str, string ans) { //string ans is an empty string.
 }
 
 void printPermuatations(string str, string ans) {
+
 	if (str.length() == 0) {
 		cout << ans << endl;
 		return;
@@ -170,6 +171,7 @@ void print_subarray(int arr[], int n, int start, int end) {
 }
 
 void mappedString(string str, string ans) {
+
 	if (str.length() == 0) {
 		cout << ans << endl;
 		return;
@@ -180,7 +182,7 @@ void mappedString(string str, string ans) {
 
 	int ch1_int = ch1 - '0';
 
-	ch1 = ch1 - '0' + 'A' - 1;
+	ch1 = (ch1 - '0') - 1 + 'A';
 
 	mappedString(ros1, ans + ch1);
 
@@ -194,14 +196,13 @@ void mappedString(string str, string ans) {
 
 		if (second_number <= 26) {
 
-			ch2 = second_number + 'A' - 1;
+			ch2 = (second_number - 1) + 'A';
 
 			string ros2 = str.substr(2);
 
 			mappedString(ros2, ans + ch2);
 		}
 	}
-
 }
 
 string code[] = {" ", ".", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};

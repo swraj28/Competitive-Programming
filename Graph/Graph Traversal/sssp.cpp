@@ -61,30 +61,38 @@ public:
 			}
 		}
 
+
 		if (visited[dest] == false) { //if we are unable to reach the destination
 			cout << "No path found" << endl;
 		} else {
+
 			cout << "distace of each node from src node" << endl;
 			for (auto i : d) {
 				cout << i << " ";
 			}
 			cout << endl;
+
 			cout << "The predecessor(i.e.,parent) of each node" << endl;
 			for (auto i : p) {
 				cout << i << " ";
 			}
 			cout << endl;
-			vector<int> path;
+
 			//minimum distace
 			cout << "The minimum distace is" << endl;
 			cout << d[dest] << endl;
+
+			vector<int> path;
 			int x = dest;
 			path.push_back(dest);
+
 			while (p[x] != -1) {
 				path.push_back(p[x]);
 				x = p[x];
 			}
+
 			reverse(path.begin(), path.end());
+
 			cout << "The shortest path is" << endl;
 			for (auto i : path) {
 				cout << i << "->";

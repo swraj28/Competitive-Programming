@@ -20,6 +20,7 @@ int lastIndex(int arr[], int n, int si, int data) {
 		return indexFound;
 	}
 }
+
 //see the notebook for explanation
 int last_occur(int* arr, int n, int key) {
 	if (n == 0) {

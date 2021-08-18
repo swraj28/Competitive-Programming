@@ -1,0 +1,30 @@
+[
+	{
+		"correct_answers":
+		[
+			"213"
+		],
+		"test": "123\n222\n"
+	},
+	{
+		"correct_answers":
+		[
+			"9321"
+		],
+		"test": "3921\n10000\n"
+	},
+	{
+		"correct_answers":
+		[
+			"4940"
+		],
+		"test": "4940\n5000\n"
+	},
+	{
+		"correct_answers":
+		[
+			"98598771"
+		],
+		"test": "15778899\n98715689\n"
+	}
+]

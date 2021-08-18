@@ -4,7 +4,7 @@ using namespace std;
 class Graph {
 
 	int V;
-	list<int> *l;//pointer to the list.(Here we do not know the no.of vetices during the compile time but it will be known during run time)
+	list<int> *l;//pointer to the array of lists.(Here we do not know the no.of vetices during the compile time but it will be known during run time)
 
 public:
 	Graph(int v) {//constructor that create a list of size v.

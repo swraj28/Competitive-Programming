@@ -61,7 +61,6 @@ void solve(vector<int> graph[], vector<int> rev_graph[], int n) {
 			component_name++;
 		}
 	}
-
 }
 
 int main() {

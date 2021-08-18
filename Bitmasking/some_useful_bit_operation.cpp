@@ -83,6 +83,7 @@ int clear_range_i_to_j(int n, int i, int j) {
 // 8. Biggest power of 2 that is a divisor of n
 
 void biggest_power(int n) {
+
 	if (n & 1) {
 		cout << "n is not divisble by any power of 2" << endl;
 		return;
