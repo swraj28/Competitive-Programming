@@ -29,6 +29,7 @@ public:
         while (!q.empty()) {
 
             int f = q.front();
+
             q.pop();
 
             for (int nbr : l[f]) {
@@ -48,7 +49,8 @@ int min_dice_throws(int n, vector<pair<int, int> > snakes, vector<pair<int, int>
 
     vector<int> board(n + 1, 0);  // 1 based indexing
 
-    //board to graph conversion
+    //board to graph conversion (Very Very Important)
+
     for (auto sp : snakes) {
         int s = sp.first;
         int e = sp.second;

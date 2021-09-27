@@ -7,7 +7,7 @@ class Graph {
 	map<int, list<int>> adj;
 public:
 
-	Graph() {
+	Graph() {  // Default Constructor
 
 	}
 
@@ -48,8 +48,10 @@ public:
 		// Starts with algorithm
 
 		while (!q.empty()) {
+
 			int node = q.front();
 			q.pop();
+
 			cout << node << " ";
 
 			for (auto nbr : adj[node]) {

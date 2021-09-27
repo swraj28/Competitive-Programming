@@ -28,6 +28,7 @@ public:
         }
 
         stack[src] = false;
+
         return false;
     }
 

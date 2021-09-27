@@ -2,6 +2,7 @@
 using namespace std;
 
 #define pb push_back
+
 #define fast ios::sync_with_stdio(0) , cin.tie(0) , cout.tie(0) ;
 
 const int nax = 1e5 + 10;
@@ -25,6 +26,7 @@ int main() {
 	}
 
 	int mx_sz = 1; //max_size of the component initially.
+
 	int grp_cnt = n; //Intially all the nodes are attached to themsleves.Therefore there will be n connected component
 
 	for (int i = 1 ; i <= m ; i++ ) {

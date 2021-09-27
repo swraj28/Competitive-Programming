@@ -4,6 +4,7 @@
 using namespace std;
 
 template<typename T>
+
 class Graph {
 
 	map<T, list<T>> adjList;
@@ -12,6 +13,7 @@ public:
 	Graph() {
 
 	}
+
 	void addEdge(T u, T v) {
 		adjList[u].push_back(v);
 	}
@@ -32,10 +34,11 @@ public:
 
 	void dfsHelper(T node, map<T, bool> &visited, list<T> &ordering) {
 
-		//Whenever to come to a node, mark it visited
+		//Whenever to come to a node, mark it visited.
 		visited[node] = true;
 
-		//Try to find out a node which is neigbour of current node and not yet visited
+		//Try to find out a node which is neigbour of current node and not yet visited.
+
 		for (T neighbour : adjList[node]) {
 			if (!visited[neighbour]) {
 				dfsHelper(neighbour, visited, ordering);
@@ -44,12 +47,11 @@ public:
 
 		ordering.push_front(node);
 
-		// reverse(ordering.begin(), ordering.end());
-		for (auto node : ordering) {
-			cout << node << endl;
-		}
-		cout << endl;
-		return;
+		// for (auto node : ordering) {
+		// 	cout << node << endl;
+		// }
+		// cout << endl;
+		// return;
 	}
 
 	void dfs() {
@@ -63,7 +65,9 @@ public:
 		}
 
 		// Call the helper function
+
 		// Dfs is being called on every node
+
 		for (auto p : adjList) {
 			T node = p.first;
 			if (!visited[node]) {
@@ -72,7 +76,9 @@ public:
 		}
 
 		//Print the list
+
 		reverse(ordering.begin(), ordering.end());
+
 		for (auto node : ordering) {
 			cout << node << endl;
 		}

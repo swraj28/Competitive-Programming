@@ -17,10 +17,12 @@ public:
 			adj[dest].push_back(src);
 		}
 	}
+
 	//Dfs:-
+
 	bool cycle_helper(int node, bool*visited, int parent) {
+
 		visited[node] = true;
-		// cout << node << " ";
 
 		for (auto nbr : adj[node]) {
 			//two cases
@@ -28,6 +30,7 @@ public:
 
 				//go and recursively visit the nbr
 				//the nbr may lead to a node which may form a cycle.
+
 				bool cycle_mila = cycle_helper(nbr, visited, node);
 				if (cycle_mila) {
 					return true;
@@ -36,6 +39,7 @@ public:
 				return true;
 			}
 		}
+
 		return false;
 	}
 

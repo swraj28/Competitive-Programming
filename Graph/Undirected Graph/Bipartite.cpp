@@ -9,11 +9,14 @@ bool dfs_helper(vector<int> graph[], int node, int *visited, int parent, int col
 
 	for (auto nbr : graph[node]) {
 		if (visited[nbr] == 0) {
+
 			bool rec_result = dfs_helper(graph, nbr, visited, node, 3 - color);
+
 			if (rec_result == false) {
 				return false;
 			}
-		} else if (nbr != parent and color == visited[nbr]) {
+
+		} else if (nbr != parent  and color == visited[nbr]) {
 			return false;
 		}
 	}

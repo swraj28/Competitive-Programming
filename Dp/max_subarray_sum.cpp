@@ -93,7 +93,29 @@ int maxSubarraySumOptimized(int arr[], int n) {  // o(n^2)
 	return maxSum;
 }
 
-int kadanesAlgo(int arr[], int n) {  // o(n)
+int max_subarray_sum(int arr[], int n) {  // Time:-o(n) : Space:-o(n)
+
+	vector<int> dp(100, 0);
+
+	dp[0] = (arr[0] > 0) ? arr[0] : 0;
+
+	int mx_so_far = dp[0];
+
+	for (int i = 1; i < n; i++) {
+
+		dp[i] = dp[i - 1] + arr[i];
+
+		if (dp[i] < 0) {
+			dp[i] = 0;
+		}
+
+		mx_so_far = max({mx_so_far, dp[i]});
+	}
+
+	return mx_so_far;
+}
+
+int kadanesAlgo(int arr[], int n) {  // o(n) space:-o(1)
 
 	int maxSum = arr[0];
 	int currSum = arr[0];

@@ -8,10 +8,12 @@ class Graph {
 	map<T, list<T>> adjList;
 
 public:
+
 	// Default Constructor
 	Graph() {
 
 	}
+
 	void addEdge(T u, T v, bool bidir = true) {
 
 		adjList[u].push_back(v);
@@ -21,7 +23,6 @@ public:
 	}
 
 	void print() {
-
 		//Iterate over the map
 		for (auto i : adjList) {
 			cout << i.first << "->";
@@ -35,6 +36,7 @@ public:
 	}
 
 	//Dfs Recursive:-(Implict Stack)
+
 	void dfsHelper(T node, map<T, bool> &visited) {
 		//Whenever to come to a node, mark it visited
 		visited[node] = true;
@@ -55,7 +57,7 @@ public:
 			T node = p.first;
 			visited[node] = false;
 		}
-		dfsHelper(src, visited);
+		dfsHelper(src, visited);  // Assuming the graph has only one connected component.
 	}
 };
 

@@ -3,6 +3,7 @@ using namespace std;
 #define ll long long
 
 //Brute Force Implememtation:-
+
 const int n = 101;
 int parent[n];
 
@@ -44,7 +45,7 @@ struct optimized {
 		mx[v] = v;
 	}
 
-	int find_par(int v) {
+	int find_par(int v) {  // log(n) for every query.  (n--> no. of nodes)
 
 		if (v == parent[v]) {
 			return v;
@@ -52,6 +53,8 @@ struct optimized {
 
 		return parent[v] = find_par(parent[v]);
 	}
+
+	// Union By Size
 
 	void union_sets(int a, int b) {
 
@@ -91,6 +94,7 @@ struct optimized {
 };
 
 int main() {
+
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	//Here We are creating disjoint sets where each element represent their own cluster.

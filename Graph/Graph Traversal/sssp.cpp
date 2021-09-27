@@ -38,6 +38,7 @@ public:
 		vector<int> p(n);//it stores for each vertex the vertex from which we reached it(i.e,the parent)
 
 		//Mark all the node visited as false
+
 		for (auto i : adj) {
 			int node = i.first;
 			visited[node] = false;
@@ -56,13 +57,13 @@ public:
 					visited[i] = true;
 					q.push(i);
 					d[i] = d[x] + 1; //distace from x;
-					p[i] = x; //Parent will be x itself
+					p[i] = x; //Parent of i  will be x itself
 				}
 			}
 		}
 
 
-		if (visited[dest] == false) { //if we are unable to reach the destination
+		if (visited[dest] == false) {  //if we are unable to reach the destination
 			cout << "No path found" << endl;
 		} else {
 
@@ -79,6 +80,7 @@ public:
 			cout << endl;
 
 			//minimum distace
+
 			cout << "The minimum distace is" << endl;
 			cout << d[dest] << endl;
 
