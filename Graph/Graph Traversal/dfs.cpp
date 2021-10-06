@@ -59,6 +59,36 @@ public:
 		}
 		dfsHelper(src, visited);  // Assuming the graph has only one connected component.
 	}
+
+	// Iterative Depth First Search:- (It is similar to BFS if we replace queue with a stack)
+
+	void iterative_dfs(T src) {
+
+		map<T, bool> visited;
+		//Mark all the nodes as not visited in the beginning
+		for (auto p : adjList) {
+			T node = p.first;
+			visited[node] = false;
+		}
+
+		stack<T> s;
+		s.push(src);
+		visited[src] = true;
+
+		while (!s.empty()) {
+			T node = s.top();
+			s.pop();
+
+			cout << node << " ";
+
+			for (auto nbr : adjList[node]) {
+				if (!visited[nbr]) {
+					s.push(nbr);
+					visited[nbr] = true;
+				}
+			}
+		}
+	}
 };
 
 int main() {
@@ -76,6 +106,11 @@ int main() {
 	cout << "Dfs Recursive Implementaion" << endl;
 	g.dfs(0);
 	cout << endl;
+
+	cout << "Dfs Iterative Implementaion" << endl;
+	g.iterative_dfs(0);
+	cout << endl;
+
 
 	return 0;
 }
