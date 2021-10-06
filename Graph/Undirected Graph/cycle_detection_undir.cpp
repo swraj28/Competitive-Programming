@@ -57,14 +57,12 @@ public:
 	}
 
 	//Bfs:-
-	bool is_cycle(int src) {
+	bool is_cycle(int src, map<int, bool> &visited, map<int, int> &parent) {
+
 		queue<int> q;
-		map<int, bool> visited;
-		map<int, int> parent;
 
 		q.push(src);
 		visited[src] = true;
-		parent[src] = -1;
 
 		while (!q.empty()) {
 			int node = q.front();
@@ -78,6 +76,29 @@ public:
 					visited[nbr] = true;
 					parent[nbr] = node;
 
+				}
+			}
+		}
+
+		return false;
+	}
+
+	bool bfs_cycle_helper() {
+
+		int n = adj.size();
+
+		map<int, bool> visited;
+		map<int, int> parent;
+
+		for (int i = 0; i < n; i++) {
+			visited[i] = false;
+			parent[i] = -1;
+		}
+
+		for (int i = 0; i < n; i++) {
+			if (!visited[i]) {
+				if (is_cycle(i, visited, parent)) {
+					return true;
 				}
 			}
 		}
