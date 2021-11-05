@@ -46,6 +46,9 @@ void union_sets(int a, int b) {
 
 struct Edge {
 	int u, v, weight;
+
+	// Overloading the < operator
+
 	bool operator<(Edge const& other) {
 		return weight < other.weight;
 	}

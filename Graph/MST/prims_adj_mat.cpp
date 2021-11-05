@@ -2,6 +2,8 @@
 using namespace std;
 #define ll long long
 
+// t.c:- O(V^2)
+
 int minEdgeVertex(vector<int> &weight, vector<bool> &growingSet) {
 	int min_idx = -1, mn = INT_MAX;
 
