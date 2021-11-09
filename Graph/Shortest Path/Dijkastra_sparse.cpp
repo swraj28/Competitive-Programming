@@ -26,11 +26,18 @@ void dijkstra_set(int s, vector<int> & d, vector<int> & p) {
 		q.erase(q.begin());
 
 		for (auto edge : adj[v]) {
+
 			int to = edge.first;
 			int len = edge.second;
 
 			if (d[v] + len < d[to]) {
-				q.erase({d[to], to});
+
+				auto itr = q.find({d[to], to});
+
+				if (itr != q.end()) {
+					q.erase({d[to], to});
+				}
+
 				d[to] = d[v] + len;
 				p[to] = v;
 				q.insert({d[to], to});

@@ -74,6 +74,8 @@ bool find_any_sol(int a, int b, int c, int &x, int &y, int &g) {
 	x *= c / g;
 	y *= c / g;
 
+	// Since we have found the solution of (a*x+b*y=c). but if a or b is negative then to maintain the generality we will
+	// make x or y negative as per signs of a and b.
 	if (a < 0)x = -x;
 	if (b < 0)y = -y;
 
