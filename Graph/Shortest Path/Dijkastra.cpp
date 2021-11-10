@@ -22,7 +22,8 @@ void dijkstra(int s, vector<int> & d, vector<int> & p) {
 
 		int v = -1;
 
-		//	optimization:-
+		// optimization:-
+
 		// Since for every we are iterating n times to find its least length neighbour.
 		// Therefore we can use some data structure like sets or priority queue to reduce the searching for every node from n to log(n).
 		// The set or priority queue will only contain the unmarked node.
@@ -39,7 +40,10 @@ void dijkstra(int s, vector<int> & d, vector<int> & p) {
 
 		u[v] = true;
 
-		//	In totallity it will loop m times only throughout the process (m->no of edges)
+		//  In totallity it will loop 2*m times (upper_bound) only throughout the process (m->no of edges)
+
+		// suppose two vertices 'u' and 'v' are connected to each other then u will make a relallxation operation on v and v will make a
+		// relaxation operation on u. Therefor for a single edge at max 2 relaxation operation can be performed.
 
 		for (auto edge : adj[v]) { // Relaxation
 

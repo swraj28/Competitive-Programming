@@ -4,7 +4,7 @@ using namespace std;
 
 // By using Disjoint Set Union
 
-// T.c->O(E)log(V)
+// T.c->O(E)log(V) --> For justification see the notes
 
 const int N = (1e5 + 5);
 
@@ -58,18 +58,18 @@ int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	int n, m;
-	cin >> n >> m;
+	cin >> n >> m;  // n-->no. of vertices and m--> no. of edges
 
 	vector<Edge> edges;
 
-	for (int i = 0; i < m; i++) {
+	for (int i = 0; i < m; i++) {  // o(m)
 		int a, b, w;
 		cin >> a >> b >> w;
 
 		edges.push_back({a, b, w});
 	}
 
-	sort(edges.begin(), edges.end());
+	sort(edges.begin(), edges.end()); // o(mlog(m))
 
 	// for (int i = 0; i < m; i++) {
 	// 	cout << edges[i].u << " " << edges[i].v << " " << edges[i].weight << endl;
@@ -79,11 +79,11 @@ int main() {
 
 	vector<Edge> result;
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) { // o(n)
 		make_set(i);
 	}
 
-	for (Edge e : edges) {
+	for (Edge e : edges) {  // o(m)
 		if (find_par(e.u) != find_par(e.v)) {
 			mn_cost += e.weight;
 			result.push_back(e);
