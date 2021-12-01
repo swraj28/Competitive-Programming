@@ -33,11 +33,13 @@ void build(int a[], int v, int tl, int tr) {
 	build(a, v * 2, tl, tm);
 	build(a, v * 2 + 1, tm + 1, tr);
 
+	// Backtracking:-
+
 	t[v] = t[v * 2] + t[v * 2 + 1];
 
 }
 
-int Query(int v, int tl, int tr, int l, int r) {
+int Query(int v, int tl, int tr, int l, int r) {  //o(log(n))
 
 	if (l > r) {
 		return 0;
@@ -52,7 +54,7 @@ int Query(int v, int tl, int tr, int l, int r) {
 	return Query(v * 2, tl, tm, l, min(r, tm)) + Query(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r);
 }
 
-void update(int v, int tl, int tr, int pos, int new_val) {
+void update(int v, int tl, int tr, int pos, int new_val) {  //o(log(n))
 
 	if (tl == tr) {
 		t[v] = new_val; // Changing the value in the tree at the leaf node.
