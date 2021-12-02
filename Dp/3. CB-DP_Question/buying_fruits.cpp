@@ -1,8 +1,14 @@
 /*
-Prateek went to purchase fruits mainly apples, mangoes and oranges. There are N different fruit sellers in a line. Each fruit seller sells all three fruit items, but at different prices. Prateek, obsessed by his nature to spend optimally, decided not to purchase same fruit from adjacent shops. Also, Prateek will purchase exactly one type of fruit item (only 1kg) from one shop. Prateek wishes to spend minimum money buying fruits using this strategy. Help Prateek determine the minimum money he will spend. If he becomes happy, he may offer you discount on your favorite course in Coding Blocks ;). All the best!
+Prateek went to purchase fruits mainly apples, mangoes and oranges. There are N different fruit sellers in a line.
+Each fruit seller sells all three fruit items, but at different prices.
+Prateek, obsessed by his nature to spend optimally, decided not to purchase same fruit from adjacent shops.
+Also, Prateek will purchase exactly one type of fruit item (only 1kg) from one shop.
+Prateek wishes to spend minimum money buying fruits using this strategy. Help Prateek determine the minimum money he will spend.
+If he becomes happy, he may offer you discount on your favorite course in Coding Blocks ;). All the best!
 
 Input Format
-First line indicates number of test cases T. Each test case in its first line contains N denoting the number of fruit sellers in Fruit Market. Then each of next N lines contains three space separated integers denoting cost of apples, mangoes and oranges per kg with that particular fruit seller.
+First line indicates number of test cases T. Each test case in its first line contains N denoting the number of fruit sellers in Fruit Market.
+Then each of next N lines contains three space separated integers denoting cost of apples, mangoes and oranges per kg with that particular fruit seller.
 
 Constraints
 1 ≤ T ≤ 10 1 ≤ N ≤ 10^5 Cost of each fruit(apples/mangoes/oranges) per kg does not exceed 10^4
@@ -73,7 +79,7 @@ vector<vector<int>> v;
 
 int dp[100005][3];
 
-int recur(int si, int last) {  // This function will return minimum price spent by prateek bhaiya
+int recur(int si, int last) {  // This function will return minimum price spent by prateek.
 	if (si >= n) {
 		return 0;
 	}

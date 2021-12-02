@@ -38,70 +38,72 @@ ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) %
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 /*--------------------------------------------------------------------------------------------*/
+
 int n;
 vector<int> v;
 
-// last-->0 (Rest)
-// last-->1 (Gym)
-// last-->2 (Contest)
+// prev-->0 negative and prev-->1 positive
 
-int dp[105][3];
+int dp[100005][2];
 
-int recur(int si, int last) { // This function will return min rest by vasya
-    if (si >= n) {
-        return 0;
-    }
+int recur(int si, int prev) { // this function will return the minimum number of changes
+	if (si >= (n - 1)) {
+		return 0;
+	}
 
-    if (dp[si][last] != -1) {
-        return dp[si][last];
-    }
+	if (dp[si][prev] != -1) {
+		return dp[si][prev];
+	}
 
-    if (last == 0) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-        }
+	if (v[si] == 0) {
+		if (prev == 0) {
+			return dp[si][prev] = min({1 + recur(si + 1, 0), 1 + recur(si + 1, 1)});
+		}
 
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1), recur(si + 1, 2)});
-    } else if (last == 1) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        }
+		return dp[si][prev] = 1 + recur(si + 1, 1);
+	}
 
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-    }
+	if (prev == 0) {
+		if (v[si] < 0) {
+			return dp[si][prev] = recur(si + 1, 0);
+		}
 
-    if (v[si] == 0) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 1) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 2) {
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-    }
+		return dp[si][prev] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
+	}
 
-    return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
+	if (v[si] < 0) {
+		return dp[si][prev] = 1 + recur(si + 1, 1);
+	}
+
+	return dp[si][prev] = recur(si + 1, 1);
 }
 
 int main() {
-    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        v.pb(x);
-    }
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
 
-    ms(dp, -1);
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		int x;
+		cin >> x;
+		v.pb(x);
+	}
 
-    cout << recur(0, 0) << endl;
+	ms(dp, -1);
 
-    return 0;
+	int ans = recur(1, 0);
+
+	if (v[0] >= 0) {
+		ans++;
+	}
+
+	if (v[n - 1] <= 0) {
+		ans++;
+	}
+
+	cout << ans << endl;
+
+	return 0;
 }

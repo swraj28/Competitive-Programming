@@ -38,70 +38,63 @@ ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) %
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 /*--------------------------------------------------------------------------------------------*/
-int n;
-vector<int> v;
 
-// last-->0 (Rest)
-// last-->1 (Gym)
-// last-->2 (Contest)
+ll dp[200005][11];
 
-int dp[105][3];
+ll recur(ll m, ll x) {  // we are passing every single digit every time
+	if (m == 0) {
+		return 0;
+	}
 
-int recur(int si, int last) { // This function will return min rest by vasya
-    if (si >= n) {
-        return 0;
-    }
+	if (dp[m][x] != -1) {
+		return dp[m][x];
+	}
 
-    if (dp[si][last] != -1) {
-        return dp[si][last];
-    }
+	ll ans = 0;
 
-    if (last == 0) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-        }
+	if (m >= (10 - x)) {
+		ans = (1 + recur(m - (10 - x), 1) % mod + recur(m - (10 - x), 0) % mod) % mod;
+	}
 
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1), recur(si + 1, 2)});
-    } else if (last == 1) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        }
-
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-    }
-
-    if (v[si] == 0) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 1) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 2) {
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-    }
-
-    return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
+	return dp[m][x] = ans;
 }
 
 int main() {
-    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        v.pb(x);
-    }
+	int t;
+	cin >> t;
 
-    ms(dp, -1);
+	ms(dp, -1);
 
-    cout << recur(0, 0) << endl;
+	recur(200001, 0);
+	recur(200001, 1);
+	recur(200001, 2);
+	recur(200001, 3);
+	recur(200001, 4);
+	recur(200001, 5);
+	recur(200001, 6);
+	recur(200001, 7);
+	recur(200001, 8);
+	recur(200001, 9);
 
-    return 0;
+	while (t--) {
+		string s;
+		int m;
+		cin >> s >> m;
+
+		int n = s.length();
+
+		ll ans = 0;
+
+		for (int i = 0; i < n; i++) {
+			int x = (s[i] - '0');
+
+			ans = (ans + 1 + recur(m, x)) % mod;
+		}
+
+		cout << ans << endl;
+	}
+
+	return 0;
 }

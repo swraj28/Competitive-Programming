@@ -38,70 +38,58 @@ ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) %
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 /*--------------------------------------------------------------------------------------------*/
-int n;
-vector<int> v;
 
-// last-->0 (Rest)
-// last-->1 (Gym)
-// last-->2 (Contest)
+ll n;
+vector<ll> v;
+map<ll, ll> m;
 
-int dp[105][3];
+// prev-->0 not selected the last element
+// prev-->1 selected the last element
 
-int recur(int si, int last) { // This function will return min rest by vasya
-    if (si >= n) {
-        return 0;
-    }
+ll dp[100005][2];
 
-    if (dp[si][last] != -1) {
-        return dp[si][last];
-    }
+ll recur(ll si, ll prev) {
+	if (si >= n) {
+		return 0;
+	}
 
-    if (last == 0) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-        }
+	if (dp[si][prev] != -1) {
+		return dp[si][prev];
+	}
 
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1), recur(si + 1, 2)});
-    } else if (last == 1) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        }
+	if (prev == 0) {
+		return dp[si][prev] = max({(m[v[si]]*v[si]) + recur(si + 1, 1), recur(si + 1, 0)});
+	}
 
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-    }
+	if (abs(v[si] - v[si - 1]) > 1) {
+		return dp[si][prev] = max({(m[v[si]]*v[si]) + recur(si + 1, 1), recur(si + 1, 0)});
+	}
 
-    if (v[si] == 0) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 1) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 2) {
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-    }
-
-    return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
+	return dp[si][prev] = recur(si + 1, 0);
 }
 
 int main() {
-    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        v.pb(x);
-    }
+	cin >> n;
+	set<ll> s;
 
-    ms(dp, -1);
+	for (ll i = 0; i < n; i++) {
+		ll x;
+		cin >> x;
+		s.insert(x);
+		m[x]++;
+	}
 
-    cout << recur(0, 0) << endl;
+	for (auto i : s) {
+		v.pb(i);
+	}
 
-    return 0;
+	n = v.size();
+
+	ms(dp, -1);
+
+	cout << max({recur(1, 0), (m[v[0]]*v[0]) + recur(1, 1)})  << endl;
+
+	return 0;
 }

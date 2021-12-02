@@ -38,70 +38,108 @@ ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) %
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 /*--------------------------------------------------------------------------------------------*/
-int n;
-vector<int> v;
 
-// last-->0 (Rest)
-// last-->1 (Gym)
-// last-->2 (Contest)
+vector<vector<char>> mat;
+vector<vector<int>> visited;
+vector<vector<char>> ans;
 
-int dp[105][3];
+int n, m;
 
-int recur(int si, int last) { // This function will return min rest by vasya
-    if (si >= n) {
-        return 0;
-    }
+int dx[4] = { -1, 1, 0, 0}, dy[4] = {0, 0, -1, 1};
 
-    if (dp[si][last] != -1) {
-        return dp[si][last];
-    }
+void dfs(int x, int y) {
 
-    if (last == 0) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-        }
+	int cnt = 0;
 
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1), recur(si + 1, 2)});
-    } else if (last == 1) {
-        if (v[si] == 0) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        } else if (v[si] == 1) {
-            return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-        } else if (v[si] == 2) {
-            return dp[si][last] = 1 + recur(si + 1, 0);
-        }
+	for (int i = 0; i < 4; i++) {
+		int new_x = x + dx[i];
+		int new_y = y + dy[i];
 
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 2)});
-    }
+		if (new_x<0 or new_x >= n or new_y<0 or new_y >= m) {
+			continue;
+		}
 
-    if (v[si] == 0) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 1) {
-        return dp[si][last] = 1 + recur(si + 1, 0);
-    } else if (v[si] == 2) {
-        return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
-    }
+		if ((visited[new_x][new_y] == 0) and (mat[new_x][new_y] != '#')) {
+			cnt++;
+		}
+	}
 
-    return dp[si][last] = min({1 + recur(si + 1, 0), recur(si + 1, 1)});
+	if (cnt <= 1) {
+
+		ans[x][y] = '+';
+
+		visited[x][y] = 1;
+
+		for (int i = 0; i < 4; i++) {
+			int new_x = x + dx[i];
+			int new_y = y + dy[i];
+
+			if (new_x<0 or new_x >= n or new_y<0 or new_y >= m) {
+				continue;
+			}
+
+			if ((visited[new_x][new_y] == 0) and (mat[new_x][new_y] != '#')) {
+				dfs(new_x, new_y);
+			}
+		}
+	}
 }
 
 int main() {
-    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        v.pb(x);
-    }
+	int t;
+	cin >> t;
+	while (t--) {
+		cin >> n >> m;
 
-    ms(dp, -1);
+		mat.assign(n, vector<char>(m, '#'));
 
-    cout << recur(0, 0) << endl;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				cin >> mat[i][j];
+			}
+		}
 
-    return 0;
+		visited.assign(n, vector<int>(m, 0));
+
+		int labx = -1, laby = -1;
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (mat[i][j] == 'L') {
+					labx = i, laby = j;
+					break;
+				}
+			}
+		}
+
+		ans = mat;
+
+		visited[labx][laby] = 1;
+
+		for (int i = 0; i < 4; i++) {
+			int x = labx + dx[i];
+			int y = laby + dy[i];
+
+			if (x<0 or x >= n or y<0 or y >= m) {
+				continue;
+			}
+
+			if ((visited[x][y] == 0) and (mat[x][y] != '#')) {
+				dfs(x, y);
+			}
+		}
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				cout << ans[i][j];
+			}
+			cout << '\n';
+		}
+		cout << '\n';
+
+	}
+
+	return 0;
 }
