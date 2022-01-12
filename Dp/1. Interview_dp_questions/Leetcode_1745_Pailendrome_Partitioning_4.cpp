@@ -17,36 +17,7 @@ public:
 
 	bool dp1[2005][2005] = {};
 
-	int dp[2005][2005];
-
-	int recur(string s, int st, int end) {  // This Function will return the minimum number of cut required
-
-		if (st == end) {
-			return 0;
-		}
-
-		if (dp1[st][end] == 1) { // If s[st..end] is a pailendrome
-			return 0;
-		}
-
-		if (dp[st][end] != -1) {
-			return dp[st][end];
-		}
-
-		int mn = INT_MAX;
-
-		for (int i = st; i < end; i++) {
-
-			if (dp1[st][i] == 1) {
-				int rec_res = 1 + recur(s, i + 1, end);
-				mn = min(mn, rec_res);
-			}
-		}
-
-		return dp[st][end] = mn;
-	}
-
-	int minCut(string s) {
+	bool checkPartitioning(string s) {
 
 		int n = s.length();
 
@@ -76,10 +47,21 @@ public:
 			}
 		}
 
-		//********************************************************************************************
+		//*******************************************************************************************
 
-		ms(dp, -1);
+		bool f = false;
 
-		return recur(s, 0, n - 1);
+		for (int i = 0; i < n; i++) {
+			for (int j = i + 1; j < n; j++) {
+				if ((j + 1) < n) {
+					if (dp1[0][i] == 1 and dp1[i + 1][j] == 1 and dp1[j + 1][n - 1] == 1) {
+						f = true;
+						break;
+					}
+				}
+			}
+		}
+
+		return f;
 	}
 };

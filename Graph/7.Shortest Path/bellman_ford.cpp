@@ -35,7 +35,14 @@ vector<int> bellman_ford(int V, int src, vector<vector<int> > edges) {
 	vector<int> dist(V + 1, INT_MAX);
 	dist[src] = 0;
 
-	//relax all edges v-1 times--> if we have 'v' number of vertices then the longest will have at most (v-1) edges.
+	//relax all edges v-1 times--> if we have 'v' number of vertices then the longest path  will have at most (v-1) edges.
+
+	/*
+	     Assertion of Bellman Ford Algorithm:-
+	           -->After the execution of ith phase,
+	           the Bellman-Ford algorithm correctly finds all shortest paths whose number of edges does not exceed i.
+	*/
+
 	for (int i = 0; i < V - 1; i++) {
 
 		for (auto edge : edges) {
@@ -74,6 +81,7 @@ vector<int> bellman_ford(int V, int src, vector<vector<int> > edges) {
 }
 
 // Mark all the node as "-INF" that forms a negative weight cycle.
+
 vector<int> bellman_ford_1(int V, int src, vector<vector<int> > edges) {
 
 	//create a vector
