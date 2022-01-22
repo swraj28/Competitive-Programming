@@ -12,45 +12,54 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-// We can even solve this quesetion in O(1) by analysing the pattern.Otherwise Recursive and Dynamic Programming Solution will also work.
+// Similar to Stone Game -4 (Leetcode)
 
 class Solution {
 public:
 
-	//Turn->0 (Alice)
-	//Turn->1 (Bob)
+	int dp[1005];
 
-	bool recur(int n, int turn) {
+	bool recur(int n) {
 
 		if (n <= 1) {
-			if (turn == 0) {
-				return false;
-			}
-
-			return true;
+			return false;
 		}
+
+		if (dp[n] != -1) {
+			return dp[n];
+		}
+
+		bool ans = false;
 
 		for (int i = 1; i * i < n; i++) {
 			if (n % i == 0) {
 
 				if (i != (n / i) and (i != 1)) {
 
-					bool rec_res = recur(n - i, turn ^ 1) or recur(n - (n / i), turn ^ 1);
+					bool rec_res = recur(n - i) and recur(n - (n / i));
 
-					if (rec_res) {
-						return true;
+					if (rec_res == false) {
+						ans = true;
+						break;
+					}
+				} else {
+					bool rec_res = recur(n - i);
+
+					if (rec_res == false) {
+						ans = true;
+						break;
 					}
 				}
-
-				return recur(n - i, turn ^ 1);
 			}
 		}
 
-		return false;
+		return dp[n] = ans;
 	}
 
 	bool divisorGame(int n) {
 
-		return recur(n, 0);
+		ms(dp, -1);
+
+		return recur(n);
 	}
 };
