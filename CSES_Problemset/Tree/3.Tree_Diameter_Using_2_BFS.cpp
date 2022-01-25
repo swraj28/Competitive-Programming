@@ -39,23 +39,56 @@ ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) %
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 /*--------------------------------------------------------------------------------------------*/
 
-const int N = (2e5 + 1);
-vector<int> gr[N];
 
+#define SZ 200005
+
+int n, m, x, y;
+
+vector<int> adj[SZ];
+
+pair<int, int> bfs(int src) {
+	int d = 0;
+
+	queue<pair<int, int> > q;
+
+	q.push({src, 0});
+
+	vector<bool> vis(SZ, false);
+
+	pair<int, int>  u;
+
+	while (!q.empty()) {
+
+		u = q.front();
+		vis[u.first] = true;
+		q.pop();
+
+		for (int v : adj[u.first]) {
+			if (!vis[v]) {
+				q.push({v, u.second + 1});
+			}
+		}
+	}
+
+	return u;
+}
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-
-	int n;
 	cin >> n;
 
 	for (int i = 0; i < n - 1; i++) {
-		int a, b;
-		cin >> a >> b;
-		gr[a].pb(b);
-		gr[b].pb(a);
+		cin >> x >> y;
+		adj[x].push_back(y);
+		adj[y].push_back(x);
 	}
+
+	pair<int, int>  end1 = bfs(1);
+
+	pair<int, int>  end2 = bfs(end1.first);
+
+	cout << end2.second << endl;
 
 	return 0;
 }
