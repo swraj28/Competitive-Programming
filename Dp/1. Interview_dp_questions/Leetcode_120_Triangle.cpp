@@ -40,5 +40,40 @@ public:
 		ms(dp, -1);
 
 		return recur(triangle, n, 0, 0);
+
+		//******************************************* Bottom Up ***********************************//
+
+		int dp[n][n] = {};   // O(N^2) Extra Space
+
+		int sm = 0;
+
+		for (int i = 0; i < n; i++) {
+			sm += triangle[i][0];
+			dp[i][0] = sm;
+		}
+
+		sm = 0;
+
+		for (int i = 0; i < n; i++) {
+			sm += triangle[i][i];
+			dp[i][i] = sm;
+		}
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 1; j < i; j++) {
+				dp[i][j] = triangle[i][j] + min({dp[i - 1][j - 1], dp[i - 1][j]});
+			}
+		}
+
+		int mn = INT_MAX;
+
+		for (int i = 0; i < n; i++) {
+			mn = min(mn, dp[n - 1][i]);
+		}
+
+		return mn;
+
+
+		// O(N)--> Extra Space
 	}
 };
