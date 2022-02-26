@@ -12,6 +12,8 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
+// T.c:- O(n^2)--> Passed On Leetcode. But it might give TLE on some other platforms(Code Studio).
+
 class Solution {
 public:
 
@@ -52,5 +54,47 @@ public:
 		ms(dp, -1);
 
 		return recur(nums, n, 0);
+	}
+};
+
+// Optimized :- O(n) Solution:- (Greedy)
+
+/*
+
+   The Idea here is while traversing keep on increasing the max reach of the player.
+
+*/
+
+class Solution {
+public:
+
+	int jump(vector<int>& nums) {
+
+		int n = nums.size();
+
+		if (n == 1) {
+			return 0;
+		}
+
+		int steps = 0, mx_reach = 0, temp_mx = INT_MIN;
+
+		for (int i = 0; i < n; i++) {
+
+			if (mx_reach >= (n - 1)) {
+				break;
+			}
+
+			if (i == mx_reach) {
+				steps++;
+				temp_mx = max({temp_mx, (i + nums[i])});
+				mx_reach = max({mx_reach, temp_mx});
+
+			} else if ((i + nums[i]) > mx_reach) {
+
+				temp_mx = max({temp_mx, (i + nums[i])});
+			}
+		}
+
+		return steps;
 	}
 };
