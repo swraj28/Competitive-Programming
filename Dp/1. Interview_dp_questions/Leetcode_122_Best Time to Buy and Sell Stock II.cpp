@@ -12,6 +12,8 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
+// TLE:- (T.c:- O(n^2) and S.C:- O(n))
+
 class Solution {
 public:
 
@@ -51,5 +53,43 @@ public:
 		ms(dp, -1);
 
 		return recur(prices, 0, n);
+	}
+};
+
+// Simple Iterative Solution:-
+
+/*
+       Suppose i buy the stock the stock at price 'x' and decided to sell it on some price 'y' (y>x). But one thing
+       that come to my mind is that an another price may appear 'z' which may give more profit with 'x'. But this is a wrong intitution
+
+       Let x,y,z   -->(x>y>z)
+
+       I decided to sell with a price of z. Profit :- (z-x)
+
+       I decide to sell with a price of y and again by a stock with price y and then sell it at a price 'z':- (y-x)+(z-y)=(x+z)  --> This is more profitable.
+*/
+
+class Solution {
+public:
+
+	int maxProfit(vector<int>& prices) {
+
+		int n = prices.size();
+
+		int total_profit = 0;
+
+		int c_stock = prices[0];
+
+		for (int i = 1; i < n; i++) {
+			if (prices[i] > c_stock) {
+				total_profit += (prices[i] - c_stock);
+
+				c_stock = prices[i];
+			} else if (prices[i] < c_stock) {
+				c_stock = prices[i];
+			}
+		}
+
+		return total_profit;
 	}
 };
